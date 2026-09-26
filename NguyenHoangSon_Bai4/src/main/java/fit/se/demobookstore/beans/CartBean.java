@@ -42,7 +42,6 @@ public class CartBean implements Serializable {
         }
     }
 
-    // tính tổng số lượng sách trong giỏ (để hiển thị "Shopping cart (n)")
     public int getItemCount() {
         int count = 0;
         for (CartItemBean item : items) {
@@ -51,7 +50,6 @@ public class CartBean implements Serializable {
         return count;
     }
 
-    // tính tổng tiền
     public double getTotal() {
         double total = 0;
         for (CartItemBean item : items) {
@@ -59,8 +57,6 @@ public class CartBean implements Serializable {
         }
         return total;
     }
-
-    // xóa hết giỏ hàng
     public void clear() {
         items.clear();
     }

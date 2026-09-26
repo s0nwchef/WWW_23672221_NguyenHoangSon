@@ -33,6 +33,7 @@ public class BookServlet extends HttpServlet {
         String idstr = req.getParameter("id");
         String keyword = req.getParameter("keyword");
 
+        // Xem chi tiết 1 sách
         if (idstr != null) {
             int id = Integer.parseInt(idstr);
             Book book = bookDAO.getBookById(id);
@@ -47,6 +48,7 @@ public class BookServlet extends HttpServlet {
             }
         }
 
+        // Tìm kiếm sách theo tên
         List<Book> books;
         if (keyword != null && !keyword.trim().isEmpty()) {
             books = bookDAO.searchByTittle(keyword.trim());
