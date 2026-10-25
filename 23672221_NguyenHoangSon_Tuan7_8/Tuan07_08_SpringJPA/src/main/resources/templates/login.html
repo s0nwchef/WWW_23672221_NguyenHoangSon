@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Đăng nhập')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main>
+    <h1>Đăng nhập</h1>
+    <form class="card" th:action="@{/login}" method="post">
+        <div class="alert error-box" th:if="${param.error}">Sai tên đăng nhập hoặc mật khẩu.</div>
+        <div class="alert" th:if="${param.logout}">Bạn đã đăng xuất.</div>
+        <label>Tên đăng nhập
+            <input type="text" name="username" autofocus required>
+        </label>
+        <label>Mật khẩu
+            <input type="password" name="password" required>
+        </label>
+        <div class="buttons">
+            <button type="submit" class="btn">Đăng nhập</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

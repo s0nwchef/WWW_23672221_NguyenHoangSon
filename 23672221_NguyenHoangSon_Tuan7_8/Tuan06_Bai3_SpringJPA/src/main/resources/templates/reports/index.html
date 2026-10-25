@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Thống kê')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main>
+    <h1>Thống kê &amp; quan hệ 1-n</h1>
+
+    <h2>1. Nhân viên theo Position ID</h2>
+    <form class="card inline" th:action="@{/reports/by-position}" method="get">
+        <select name="positionId">
+            <option th:each="p : ${positions}" th:value="${p.id}" th:text="${p.title}"></option>
+        </select>
+        <button class="btn" type="submit">Xem</button>
+    </form>
+
+    <h2>2. Nhân viên theo Department ID và Position ID</h2>
+    <form class="card inline" th:action="@{/reports/by-dept-position}" method="get">
+        <select name="departmentId">
+            <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
+        </select>
+        <select name="positionId">
+            <option th:each="p : ${positions}" th:value="${p.id}" th:text="${p.title}"></option>
+        </select>
+        <button class="btn" type="submit">Xem</button>
+    </form>
+
+    <h2>3. Top N lương cao nhất trong một phòng ban</h2>
+    <form class="card inline" th:action="@{/reports/top}" method="get">
+        <select name="departmentId">
+            <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
+        </select>
+        <input type="number" name="n" value="5" min="1" max="100" style="width:80px">
+        <button class="btn" type="submit">Xem</button>
+    </form>
+
+    <h2>4. Số nhân viên của mỗi phòng ban</h2>
+    <table class="data">
+        <thead><tr><th>ID</th><th>Phòng ban</th><th>Số nhân viên</th></tr></thead>
+        <tbody>
+        <tr th:each="r : ${deptCounts}">
+            <td th:text="${r.departmentId}"></td>
+            <td th:text="${r.departmentName}"></td>
+            <td class="num" th:text="${r.employeeCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>5. Lương trung bình và tổng lương theo phòng ban</h2>
+    <table class="data">
+        <thead><tr><th>ID</th><th>Phòng ban</th><th>Số NV</th><th>Lương TB</th><th>Tổng lương</th></tr></thead>
+        <tbody>
+        <tr th:each="r : ${deptSalaries}">
+            <td th:text="${r.departmentId}"></td>
+            <td th:text="${r.departmentName}"></td>
+            <td class="num" th:text="${r.employeeCount}"></td>
+            <td class="num" th:text="${#numbers.formatDecimal(r.avgSalary, 0, 'POINT', 0, 'COMMA')}"></td>
+            <td class="num" th:text="${#numbers.formatDecimal(r.totalSalary, 0, 'POINT', 0, 'COMMA')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>6. Phòng ban chưa có nhân viên</h2>
+    <table class="data">
+        <thead><tr><th>ID</th><th>Phòng ban</th></tr></thead>
+        <tbody>
+        <tr th:each="d : ${emptyDepartments}">
+            <td th:text="${d.id}"></td><td th:text="${d.name}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(emptyDepartments)}"><td colspan="2" class="empty">Mọi phòng ban đều có nhân viên.</td></tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

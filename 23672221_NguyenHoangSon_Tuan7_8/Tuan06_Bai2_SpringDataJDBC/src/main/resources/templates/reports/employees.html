@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${title})}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main>
+    <h1 th:text="${title}">Báo cáo</h1>
+    <p>Số kết quả: <strong th:text="${#lists.size(employees)}">0</strong> &middot;
+        <a th:href="@{/reports}">&larr; Quay lại thống kê</a></p>
+    <table th:replace="~{fragments/layout :: employeeTable(${employees})}"></table>
+</main>
+</body>
+</html>

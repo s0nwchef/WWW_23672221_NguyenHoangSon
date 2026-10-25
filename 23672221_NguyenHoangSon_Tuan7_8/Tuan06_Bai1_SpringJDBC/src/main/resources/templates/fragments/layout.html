@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">Employee</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav th:fragment="nav">
+    <strong>Spring JDBC</strong>
+    <a th:href="@{/employees}">Danh sách</a>
+    <a th:href="@{/employees/new}">Thêm mới</a>
+    <a th:href="@{/employees/search}">Tìm kiếm</a>
+    <a th:href="@{/reports}">Thống kê</a>
+</nav>
+
+<table class="data" th:fragment="employeeTable(list)">
+    <thead>
+    <tr><th>ID</th><th>Họ tên</th><th>Chức danh</th><th>Tuổi</th><th>Lương</th><th>Phòng ban</th><th>Vị trí</th><th></th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${list}">
+        <td th:text="${e.id}"></td>
+        <td><a th:href="@{/employees/{id}(id=${e.id})}" th:text="${e.name}"></a></td>
+        <td th:text="${e.role}"></td>
+        <td th:text="${e.age}"></td>
+        <td class="num" th:text="${e.salary != null} ? ${#numbers.formatDecimal(e.salary, 0, 'POINT', 0, 'COMMA')} : ''"></td>
+        <td th:text="${e.departmentId != null} ? ${departmentNames.get(e.departmentId)} : ''"></td>
+        <td th:text="${e.positionId != null} ? ${positionNames.get(e.positionId)} : ''"></td>
+        <td class="actions">
+            <a th:href="@{/employees/{id}/edit(id=${e.id})}">Sửa</a>
+            <form th:action="@{/employees/{id}/delete(id=${e.id})}" method="post"
+                  onsubmit="return confirm('Xóa nhân viên này?');">
+                <button type="submit" class="link-danger">Xóa</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(list)}"><td colspan="8" class="empty">Không có dữ liệu.</td></tr>
+    </tbody>
+</table>
+</body>
+</html>

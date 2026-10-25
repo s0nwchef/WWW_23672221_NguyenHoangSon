@@ -1,0 +1,28 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, "Segoe UI", Roboto, sans-serif; margin: 0; background: #f4f6f8; color: #1f2933; }
+nav { background: #1f3a5f; padding: 12px 24px; display: flex; gap: 20px; align-items: center; }
+nav strong { color: #fff; margin-right: 12px; }
+nav a { color: #cfe0f5; text-decoration: none; }
+nav a:hover { color: #fff; }
+main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+h1 { margin-top: 0; } h2 { margin-top: 32px; font-size: 1.1rem; }
+.card { background: #fff; padding: 16px 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end; }
+.inline { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: .9rem; margin-bottom: 10px; }
+input, select { padding: 8px 10px; border: 1px solid #c4ccd4; border-radius: 6px; font-size: 1rem; }
+.btn { display: inline-block; background: #2563eb; color: #fff; border: 0; padding: 8px 16px; border-radius: 6px; text-decoration: none; cursor: pointer; font-size: .95rem; }
+.btn.secondary { background: #6b7785; }
+.buttons { display: flex; gap: 8px; }
+table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+table.data th, table.data td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e5e9ee; }
+table.data th { background: #e8eef6; font-size: .85rem; }
+table.data tr:hover td { background: #f8fafc; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.empty { text-align: center; color: #6b7785; }
+td.actions { white-space: nowrap; } td.actions form { display: inline; }
+.link-danger { background: none; border: 0; color: #c62828; cursor: pointer; padding: 0 0 0 8px; font-size: 1rem; }
+.alert { background: #e6f4ea; border: 1px solid #a5d6b0; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+.error { color: #c62828; font-weight: 400; font-size: .85rem; }
+dl.detail { display: grid; grid-template-columns: 140px 1fr; gap: 8px 16px; }
+dl.detail dt { font-weight: 600; } dl.detail dd { margin: 0; }

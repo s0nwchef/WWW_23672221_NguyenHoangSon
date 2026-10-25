@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Tìm kiếm nhân viên')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main>
+    <h1>Tìm kiếm nhân viên</h1>
+    <form class="card grid" th:action="@{/employees/search}" th:object="${criteria}" method="get">
+        <label>ID <input type="number" th:field="*{id}"></label>
+        <label>Tên chứa <input type="text" th:field="*{name}" placeholder="vd: Linh"></label>
+        <label>Tuổi từ <input type="number" th:field="*{minAge}"></label>
+        <label>Tuổi đến <input type="number" th:field="*{maxAge}"></label>
+        <label>Lương từ <input type="number" step="1000000" th:field="*{minSalary}"></label>
+        <label>Vị trí
+            <select th:field="*{positionId}">
+                <option value="">-- Tất cả --</option>
+                <option th:each="p : ${positions}" th:value="${p.id}" th:text="${p.title}"></option>
+            </select>
+        </label>
+        <div class="buttons">
+            <button type="submit" class="btn">Tìm</button>
+            <a class="btn secondary" th:href="@{/employees/search}">Xóa lọc</a>
+        </div>
+    </form>
+
+    <div th:if="${employees != null}">
+        <p>Tìm thấy <strong th:text="${#lists.size(employees)}">0</strong> kết quả.</p>
+        <table th:replace="~{fragments/layout :: employeeTable(${employees})}"></table>
+    </div>
+</main>
+</body>
+</html>

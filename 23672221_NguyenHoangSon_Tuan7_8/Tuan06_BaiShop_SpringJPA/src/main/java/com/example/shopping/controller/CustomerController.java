@@ -1,0 +1,3 @@
+package com.example.shopping.controller;
+import com.example.shopping.service.CustomerService; import org.springframework.stereotype.Controller; import org.springframework.ui.Model; import org.springframework.web.bind.annotation.*;
+@Controller @RequestMapping("/customer") public class CustomerController { private final CustomerService service; public CustomerController(CustomerService service) { this.service = service; } @GetMapping public String showAllCustomers(Model model) { model.addAttribute("customers", service.findAll()); return "customer/list"; } @GetMapping("/{id}") public String showCustomer(@PathVariable Integer id, Model model) { model.addAttribute("customer", service.findById(id)); return "customer/detail"; } }

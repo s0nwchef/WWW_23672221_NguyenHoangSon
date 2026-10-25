@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Nhân viên')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main>
+    <h1 th:text="${employeeForm.id == null} ? 'Thêm nhân viên' : 'Sửa nhân viên #' + ${employeeForm.id}">Nhân viên</h1>
+    <form class="card" method="post" th:object="${employeeForm}"
+          th:action="${employeeForm.id == null} ? @{/employees} : @{/employees/{id}(id=${employeeForm.id})}">
+        <label>Họ tên
+            <input type="text" th:field="*{name}">
+            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </label>
+        <label>Chức danh
+            <input type="text" th:field="*{role}">
+        </label>
+        <label>Tuổi
+            <input type="number" th:field="*{age}">
+            <span class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+        </label>
+        <label>Lương
+            <input type="number" step="any" th:field="*{salary}">
+            <span class="error" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></span>
+        </label>
+        <label>Phòng ban
+            <select th:field="*{departmentId}">
+                <option value="">-- Chọn --</option>
+                <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
+            </select>
+            <span class="error" th:if="${#fields.hasErrors('departmentId')}" th:errors="*{departmentId}"></span>
+        </label>
+        <label>Vị trí
+            <select th:field="*{positionId}">
+                <option value="">-- Chọn --</option>
+                <option th:each="p : ${positions}" th:value="${p.id}" th:text="${p.title}"></option>
+            </select>
+            <span class="error" th:if="${#fields.hasErrors('positionId')}" th:errors="*{positionId}"></span>
+        </label>
+        <div class="buttons">
+            <button type="submit" class="btn">Lưu</button>
+            <a class="btn secondary" th:href="@{/employees}">Hủy</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>
